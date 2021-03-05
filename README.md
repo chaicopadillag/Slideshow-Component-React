@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# SLIDESHOW REUTILIZABLE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este componente de Slideshow requiere **styled-components**, importante copiar los iconos de los controles a tu carpeta de assets
 
-## Available Scripts
+## Propiedades de SlideShow
 
-In the project directory, you can run:
+Por defecto:
 
-### `yarn start`
+```
+{controles = true, autoPlay = true, velocidadTransicion = 500, tiempoPlay = 5000 }
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+Slideshow.propTypes = {
+	controles: PropTypes.bool,
+	autoPlay: PropTypes.bool,
+	velocidadTransicion: PropTypes.number,
+	tiempoPlay: PropTypes.number,
+};
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `yarn test`
+## Propiedades de Slide
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Por defecto:
 
-### `yarn build`
+```
+{ img, texto = null, bgTexto = null, colorTexto = null }
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+Slide.propTypes = {
+	img: PropTypes.string.isRequired,
+	texto: PropTypes.string,
+	bgTexto: PropTypes.string,
+	colorTexto: PropTypes.string,
+};
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ¿Como usar?
 
-### `yarn eject`
+Clona o descarga el proyecto y copia los los dos archivos de la carpeta **_components_** a tu proyecto e importa en tu componente, mira un ejemplo.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+import Slideshow from './components/Slideshow';
+import Slide from './components/Slide';
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+const AppSlideshow = () => {
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+	const imagenes = [img1, img2, img3, img4];
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+	return (
+		<main>
 
-## Learn More
+			<Titulo>Slideshow Reutilizable</Titulo>
+			<hr style={{ marginBottom: '50px' }} />
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+			<SubTitulo>SlideShow con control y sin autoPlay</SubTitulo>
+			<Slideshow autoPlay={false}>
+				{imagenes.map((img, index) => (
+					<Slide key={index + 1} img={img} texto={`lorem ipsum #${index + 1}`} />
+				))}
+			</Slideshow>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+			<SubTitulo>SlideShow Sin control y con autoPlay</SubTitulo>
+			<Slideshow controles={false}>
+				{imagenes.map((img, index) => (
+					<Slide key={index + 1} img={img} texto={`lorem ipsum #${index + 1}`} />
+				))}
+			</Slideshow>
 
-### Code Splitting
+		</main>
+	);
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Slideshow Component](https://raw.githubusercontent.com/chaicopadillag/Slideshow-Component-Rect/master/Screenshot.png)
